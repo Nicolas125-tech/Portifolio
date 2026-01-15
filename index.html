@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicolas Mandarino Bissoqui | Desenvolvedor Full Stack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .glass-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(148, 163, 184, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 40px -10px rgba(96, 165, 250, 0.2); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body class="bg-[#0f172a] text-slate-300 antialiased selection:bg-blue-500/30 selection:text-blue-200">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass border-b border-white/5 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="font-bold text-2xl tracking-tighter text-white flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-sm">NB</span>
+                Nicolas<span class="hidden sm:inline text-slate-500">.dev</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="#inicio" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Início</a>
+                <a href="#sobre" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Sobre</a>
+                <a href="#servicos" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Serviços</a>
+                <a href="#stack" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Stack</a>
+                <a href="#projetos" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Projetos</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://github.com/Nicolas125-tech" target="_blank" class="p-2 hover:text-white transition"><i data-lucide="github" class="w-5 h-5"></i></a>
+                <a href="https://www.linkedin.com/in/nicolas-mandarino-7787761b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="p-2 hover:text-white transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                <a href="#contato" class="px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-500/20 text-sm">Contratar</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-slate-200 p-2" onclick="toggleMenu()">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full glass border-b border-white/5 flex flex-col p-6 space-y-4 shadow-2xl">
+            <a href="#inicio" class="text-lg font-medium text-white" onclick="toggleMenu()">Início</a>
+            <a href="#sobre" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">Sobre</a>
+            <a href="#servicos" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">O Que Faço</a>
+            <a href="#stack" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">Tecnologias</a>
+            <a href="#projetos" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">Projetos</a>
+            <a href="#contato" class="px-5 py-3 bg-blue-600 text-center text-white rounded-lg font-bold" onclick="toggleMenu()">Entrar em Contato</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute top-20 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                Disponível para Estágio / Trainee
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight text-white">
+                Engenharia de<br>
+                <span class="gradient-text">Software & Inovação</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Olá, sou <strong>Nicolas Bissoqui</strong>. Estudante do 5º semestre e desenvolvedor Full Stack apaixonado. Combino a disciplina da música com a lógica da programação para criar soluções em <span class="text-blue-400">Java</span>, <span class="text-yellow-400">JavaScript</span> e <span class="text-green-400">Python</span>.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#projetos" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-200 transition flex items-center justify-center gap-2 group">
+                    Ver Portfólio
+                    <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition"></i>
+                </a>
+                <a href="https://github.com/Nicolas125-tech" target="_blank" class="px-8 py-4 glass text-white font-bold rounded-xl hover:bg-white/10 transition flex items-center justify-center gap-2">
+                    <i data-lucide="github" class="w-5 h-5"></i> GitHub
+                </a>
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-white/5 flex flex-wrap justify-center gap-8 opacity-70 grayscale hover:grayscale-0 transition duration-500">
+                <img src="https://skillicons.dev/icons?i=java,react,nodejs,python,docker,mysql" alt="Tech Stack" class="h-10">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-24 px-6 relative">
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
+                <div class="relative glass-card p-8 rounded-3xl border border-white/10">
+                    <div class="flex flex-col gap-6">
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400">
+                                <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Engenharia de Software</h3>
+                                <p class="text-slate-400">Unopar Londrina • 5º Semestre</p>
+                                <p class="text-sm text-slate-500 mt-1">Foco em Desenvolvimento Web e Mobile</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-white/5"></div>
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400">
+                                <i data-lucide="music" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Background Musical</h3>
+                                <p class="text-slate-400">Professor de Orquestra e Piano (2023-2025)</p>
+                                <p class="text-sm text-slate-500 mt-1">Desenvolvi soft skills cruciais: disciplina rigorosa, trabalho em equipe e comunicação clara.</p>
+                            </div>
+                        </div>
+                        <div class="h-px bg-white/5"></div>
+                        <div class="flex items-start gap-4">
+                            <div class="p-3 bg-green-500/10 rounded-xl text-green-400">
+                                <i data-lucide="book-open" class="w-8 h-8"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Aprendizado Contínuo</h3>
+                                <p class="text-slate-400">30+ Certificações Concluídas</p>
+                                <p class="text-sm text-slate-500 mt-1">Rocketseat, EBAC, Alura, Udemy, entre outros.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-4xl font-bold text-white mb-6">Mais que código, <span class="gradient-text">construo soluções.</span></h2>
+                <div class="space-y-6 text-lg text-slate-400 leading-relaxed">
+                    <p>
+                        Minha jornada na tecnologia começou cedo, e desde então venho acumulando um arsenal de conhecimentos. Não me limito a uma única linguagem; sou movido pela ferramenta certa para o problema.
+                    </p>
+                    <p>
+                        Tenho experiência prática com o ecossistema <strong>JavaScript (React, Node)</strong>, mas também possuo forte base em <strong>Java, Python e SQL</strong>. 
+                    </p>
+                    <p>
+                        Busco uma oportunidade de <strong>Estágio ou Trainee</strong> onde eu possa aplicar minha facilidade de aprendizado e minha dedicação para entregar valor real desde o primeiro dia.
+                    </p>
+                </div>
+                <div class="mt-8 flex gap-4">
+                    <div class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm font-mono text-blue-300">
+                        📍 Londrina, PR
+                    </div>
+                    <div class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm font-mono text-green-300">
+                        🚀 Disponibilidade Imediata
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Services/Functionalities -->
+    <section id="servicos" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">O Que Eu Entrego</h2>
+                <p class="text-slate-400">Minhas competências como Full Stack aplicadas em soluções reais.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1: Web Development -->
+                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-blue-500 transition-all">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
+                        <i data-lucide="monitor" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Desenvolvimento Web & SPAs</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Criação de interfaces modernas, responsivas e de alta performance. Utilizo <strong>React.js e Angular</strong> para transformar designs complexos em Single Page Applications (SPAs) funcionais e acessíveis.
+                    </p>
+                </div>
+
+                <!-- Card 2: Back-end API -->
+                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-purple-500 transition-all">
+                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 text-purple-400">
+                        <i data-lucide="server-cog" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">APIs RESTful & Back-end</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Arquitetura de servidores robustos utilizando <strong>Node.js ou Java</strong>. Desenvolvo APIs seguras, escaláveis e documentadas (Swagger) para alimentar aplicações web e mobile.
+                    </p>
+                </div>
+
+                <!-- Card 3: Database -->
+                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-yellow-500 transition-all">
+                    <div class="w-14 h-14 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 text-yellow-400">
+                        <i data-lucide="database" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Modelagem de Dados</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Gerenciamento completo do ciclo de vida dos dados. Experiência na criação e otimização de consultas em bancos relacionais (<strong>SQL Server, MySQL</strong>) e não-relacionais (<strong>MongoDB</strong>).
+                    </p>
+                </div>
+
+                <!-- Card 4: Mobile Apps -->
+                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-green-500 transition-all">
+                    <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 text-green-400">
+                        <i data-lucide="smartphone" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Desenvolvimento Mobile</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Expansão de soluções para o universo móvel. Desenvolvimento de aplicativos nativos Android com <strong>Kotlin</strong> e interfaces híbridas fluidas, garantindo presença em múltiplos dispositivos.
+                    </p>
+                </div>
+
+                <!-- Card 5: Version Control -->
+                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-orange-500 transition-all">
+                    <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 text-orange-400">
+                        <i data-lucide="git-branch" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">DevOps & Git</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Controle de versão profissional com <strong>Git e GitHub</strong>, garantindo a integridade do código em equipe. Familiaridade com deploy e esteiras de desenvolvimento ágil.
+                    </p>
+                </div>
+                
+                 <!-- Card 6: Innovation -->
+                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-pink-500 transition-all">
+                    <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 text-pink-400">
+                        <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Resolução de Problemas</h3>
+                    <p class="text-slate-400 leading-relaxed">
+                        Mais do que escrever código, foco em resolver problemas. Aplico lógica de programação sólida e algoritmos (Python/C) para criar soluções eficientes e de fácil manutenção.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Grid -->
+    <section id="stack" class="py-20 px-6 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Arsenal Tecnológico</h2>
+                <p class="text-slate-400">Ferramentas que domino e estudo constantemente.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Front-end -->
+                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400"><i data-lucide="layout" class="w-6 h-6"></i></div>
+                        <h3 class="font-bold text-white">Front-end</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">React.js</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Angular</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">HTML5/CSS3</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Tailwind</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Bootstrap</span>
+                    </div>
+                </div>
+
+                <!-- Back-end -->
+                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-green-500/10 rounded-lg text-green-400"><i data-lucide="server" class="w-6 h-6"></i></div>
+                        <h3 class="font-bold text-white">Back-end</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Node.js</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Java</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Python</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">PHP (Laravel)</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Express</span>
+                    </div>
+                </div>
+
+                <!-- Database -->
+                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-yellow-500/10 rounded-lg text-yellow-400"><i data-lucide="database" class="w-6 h-6"></i></div>
+                        <h3 class="font-bold text-white">Dados</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">SQL Server</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">MySQL</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">MongoDB</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">NoSQL</span>
+                    </div>
+                </div>
+
+                <!-- Mobile & Outros -->
+                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400"><i data-lucide="smartphone" class="w-6 h-6"></i></div>
+                        <h3 class="font-bold text-white">Mobile & Tools</h3>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Kotlin (Android)</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Dart</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Git/GitHub</span>
+                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Swagger</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Courses Slider/Grid -->
+    <section id="cursos" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+             <div class="flex items-center justify-between mb-10">
+                <h2 class="text-3xl font-bold text-white">Formação em Destaque</h2>
+                <span class="text-sm text-slate-500 font-mono hidden md:block">/// EDUCATION_LOG.TXT</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Course Item -->
+                <div class="border-l-2 border-purple-500 pl-6 py-2 relative">
+                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-purple-500 border-4 border-[#0f172a]"></span>
+                    <h4 class="text-lg font-bold text-white">Rocketseat Ignite</h4>
+                    <p class="text-purple-400 text-sm font-medium mb-1">NodeJS (82h) • ReactJS (106h) • Java (29h)</p>
+                    <p class="text-slate-400 text-sm">Formação intensiva focada no mercado, construindo aplicações reais do zero ao deploy.</p>
+                </div>
+                
+                <!-- Course Item -->
+                <div class="border-l-2 border-blue-500 pl-6 py-2 relative">
+                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-blue-500 border-4 border-[#0f172a]"></span>
+                    <h4 class="text-lg font-bold text-white">EBAC & Onebitcode</h4>
+                    <p class="text-blue-400 text-sm font-medium mb-1">Especialista Back-end Java • Full Stack JS</p>
+                    <p class="text-slate-400 text-sm">Aprofundamento em arquitetura de software, qualidade (QA) e desenvolvimento full stack.</p>
+                </div>
+
+                <!-- Course Item -->
+                <div class="border-l-2 border-green-500 pl-6 py-2 relative">
+                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-green-500 border-4 border-[#0f172a]"></span>
+                    <h4 class="text-lg font-bold text-white">Udemy & Alura</h4>
+                    <p class="text-green-400 text-sm font-medium mb-1">Android Kotlin • Python • SQL Server</p>
+                    <p class="text-slate-400 text-sm">Cursos focados em tecnologias específicas para diversificar o stack de desenvolvimento.</p>
+                </div>
+                
+                <!-- Course Item -->
+                <div class="border-l-2 border-slate-500 pl-6 py-2 relative">
+                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-slate-500 border-4 border-[#0f172a]"></span>
+                    <h4 class="text-lg font-bold text-white">Idiomas</h4>
+                    <p class="text-slate-400 text-sm font-medium mb-1">Inglês para Devs (54h+)</p>
+                    <p class="text-slate-400 text-sm">Foco em leitura técnica e comunicação internacional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projetos" class="py-20 px-6 bg-slate-900/50">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-10">Projetos & Estudos de Caso</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 (Inferred from Ignite Node) -->
+                <div class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-60" alt="Backend Code">
+                        <div class="absolute z-20 bottom-4 left-6">
+                            <span class="text-xs font-bold px-2 py-1 bg-green-500/20 text-green-400 rounded border border-green-500/30">Node.js</span>
+                            <span class="text-xs font-bold px-2 py-1 bg-slate-700 text-slate-300 rounded border border-slate-600 ml-2">Back-end</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">API RESTful com Node.js</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-3">
+                            Desenvolvimento de uma API robusta utilizando Express, Swagger para documentação e MySQL. Foco em arquitetura limpa e princípios SOLID, conforme aprendido na trilha Ignite.
+                        </p>
+                        <a href="https://github.com/Nicolas125-tech" class="text-blue-400 hover:text-blue-300 text-sm font-semibold flex items-center gap-1">
+                            Ver Repositório <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 (Inferred from React/Web) -->
+                <div class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-60" alt="Frontend">
+                        <div class="absolute z-20 bottom-4 left-6">
+                            <span class="text-xs font-bold px-2 py-1 bg-blue-500/20 text-blue-400 rounded border border-blue-500/30">React.js</span>
+                            <span class="text-xs font-bold px-2 py-1 bg-purple-500/20 text-purple-400 rounded border border-purple-500/30 ml-2">Tailwind</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Dashboard Financeiro</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-3">
+                            Interface responsiva e interativa criada com ReactJS. Implementação de hooks, controle de estado complexo e consumo de APIs externas para exibição de dados em tempo real.
+                        </p>
+                        <a href="https://github.com/Nicolas125-tech" class="text-blue-400 hover:text-blue-300 text-sm font-semibold flex items-center gap-1">
+                            Ver Repositório <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Mobile/Kotlin) -->
+                <div class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80 z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-60" alt="Mobile">
+                        <div class="absolute z-20 bottom-4 left-6">
+                            <span class="text-xs font-bold px-2 py-1 bg-orange-500/20 text-orange-400 rounded border border-orange-500/30">Kotlin</span>
+                            <span class="text-xs font-bold px-2 py-1 bg-slate-700 text-slate-300 rounded border border-slate-600 ml-2">Android</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">App Android Nativo</h3>
+                        <p class="text-slate-400 text-sm mb-4 line-clamp-3">
+                            Desenvolvimento de aplicação mobile utilizando Kotlin. Foco em ciclo de vida de atividades, layout XML e persistência de dados local, aplicando conhecimentos da formação Mimo e Udemy.
+                        </p>
+                        <a href="https://github.com/Nicolas125-tech" class="text-blue-400 hover:text-blue-300 text-sm font-semibold flex items-center gap-1">
+                            Ver Repositório <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-24 px-6 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Pronto para acelerar <br>sua equipe?</h2>
+            <p class="text-slate-400 mb-10 text-lg max-w-2xl mx-auto">
+                Estou disponível para entrevistas e testes técnicos. Vamos conversar sobre como posso contribuir com meu background em Full Stack e minha dedicação.
+            </p>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                <a href="mailto:nicolasbissoqui@gmail.com" class="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition shadow-lg shadow-blue-600/20 w-full md:w-auto justify-center">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                    nicolasbissoqui@gmail.com
+                </a>
+                <a href="https://wa.me/qr/NQHTMITJBNCPO1" target="_blank" class="flex items-center gap-3 px-8 py-4 glass hover:bg-white/10 text-white rounded-xl font-bold transition w-full md:w-auto justify-center">
+                    <i data-lucide="phone" class="w-5 h-5"></i>
+                    Conversar no WhatsApp
+                </a>
+            </div>
+
+            <div class="mt-12 flex justify-center gap-6">
+                <a href="https://www.linkedin.com/in/nicolas-mandarino-7787761b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-slate-400 hover:text-white transition">LinkedIn</a>
+                <span class="text-slate-700">•</span>
+                <a href="https://github.com/Nicolas125-tech" target="_blank" class="text-slate-400 hover:text-white transition">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 border-t border-white/5 text-center text-slate-600 text-sm">
+        <p>© 2024 Nicolas Mandarino Bissoqui. Londrina, PR.</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar blur effect on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+                nav.classList.replace('bg-transparent', 'bg-slate-900/80');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
