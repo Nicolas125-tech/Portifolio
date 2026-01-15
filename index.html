@@ -1,503 +1,552 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicolas Mandarino Bissoqui | Desenvolvedor Full Stack</title>
+    <title>Nicolas Mandarino Bissoqui | Full Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
         .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); }
         .glass-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9)); border: 1px solid rgba(148, 163, 184, 0.1); }
         .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 40px -10px rgba(96, 165, 250, 0.2); }
+        .tab-active { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.5); }
         
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
+        /* Tuner Needle Animation */
+        .needle { transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: bottom center; }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
     </style>
 </head>
 <body class="bg-[#0f172a] text-slate-300 antialiased selection:bg-blue-500/30 selection:text-blue-200">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass border-b border-white/5 top-0 transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 glass border-b border-white/5 top-0" id="navbar">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <a href="#" class="font-bold text-2xl tracking-tighter text-white flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-sm">NB</span>
-                Nicolas<span class="hidden sm:inline text-slate-500">.dev</span>
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-sm text-white">NB</span>
+                Nicolas<span class="text-slate-500">.dev</span>
             </a>
             
             <div class="hidden md:flex items-center space-x-1">
                 <a href="#inicio" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Início</a>
+                <a href="#interativo" class="px-4 py-2 text-blue-400 font-bold hover:bg-white/5 transition rounded-lg border border-blue-500/30">Demos</a>
                 <a href="#sobre" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Sobre</a>
-                <a href="#servicos" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Serviços</a>
-                <a href="#stack" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Stack</a>
-                <a href="#projetos" class="px-4 py-2 hover:text-white transition rounded-lg hover:bg-white/5">Projetos</a>
+                <a href="#contato" class="px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-500/20 text-sm">Contato</a>
             </div>
 
-            <div class="hidden md:flex items-center gap-4">
-                <a href="https://github.com/Nicolas125-tech" target="_blank" class="p-2 hover:text-white transition"><i data-lucide="github" class="w-5 h-5"></i></a>
-                <a href="https://www.linkedin.com/in/nicolas-mandarino-7787761b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="p-2 hover:text-white transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                <a href="#contato" class="px-5 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-500 transition shadow-lg shadow-blue-500/20 text-sm">Contratar</a>
-            </div>
-
-            <!-- Mobile Menu Button -->
             <button class="md:hidden text-slate-200 p-2" onclick="toggleMenu()">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
-        
-        <!-- Mobile Drawer -->
-        <div id="mobile-menu" class="hidden md:hidden absolute w-full glass border-b border-white/5 flex flex-col p-6 space-y-4 shadow-2xl">
-            <a href="#inicio" class="text-lg font-medium text-white" onclick="toggleMenu()">Início</a>
-            <a href="#sobre" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">Sobre</a>
-            <a href="#servicos" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">O Que Faço</a>
-            <a href="#stack" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">Tecnologias</a>
-            <a href="#projetos" class="text-lg font-medium text-slate-400" onclick="toggleMenu()">Projetos</a>
-            <a href="#contato" class="px-5 py-3 bg-blue-600 text-center text-white rounded-lg font-bold" onclick="toggleMenu()">Entrar em Contato</a>
-        </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[60] glass flex flex-col p-8 space-y-6 pt-24">
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-white"><i data-lucide="x" class="w-8 h-8"></i></button>
+        <a href="#inicio" class="text-2xl font-bold text-white" onclick="toggleMenu()">Início</a>
+        <a href="#interativo" class="text-2xl font-bold text-blue-400" onclick="toggleMenu()">Demos Interativas</a>
+        <a href="#contato" class="text-2xl font-bold text-white" onclick="toggleMenu()">Contato</a>
+    </div>
+
+    <!-- Hero -->
     <section id="inicio" class="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center relative overflow-hidden">
         <div class="absolute top-20 right-0 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div class="max-w-5xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8 animate-fade-in-up">
+            <!-- Badge atualizada para Full Stack apenas -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-wider mb-8">
                 <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
-                Disponível para Estágio / Trainee
+                Full Stack Developer
             </div>
-            
             <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight text-white">
-                Engenharia de<br>
-                <span class="gradient-text">Software & Inovação</span>
+                Nicolas Mandarino<br>
+                <span class="gradient-text">Bissoqui</span>
             </h1>
-            
+            <!-- Texto focado em tecnologia -->
             <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                Olá, sou <strong>Nicolas Bissoqui</strong>. Estudante do 5º semestre e desenvolvedor Full Stack apaixonado. Combino a disciplina da música com a lógica da programação para criar soluções em <span class="text-blue-400">Java</span>, <span class="text-yellow-400">JavaScript</span> e <span class="text-green-400">Python</span>.
+                Estudante de Engenharia de Software focado em construir soluções robustas. Especialista em <strong>Java, React, Node e Python</strong> para aplicações web e mobile escaláveis.
             </p>
-            
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#projetos" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-200 transition flex items-center justify-center gap-2 group">
-                    Ver Portfólio
-                    <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition"></i>
+                <a href="#interativo" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-slate-200 transition flex items-center justify-center gap-2">
+                    Ver Projetos Reais
+                    <i data-lucide="code-2" class="w-5 h-5"></i>
                 </a>
                 <a href="https://github.com/Nicolas125-tech" target="_blank" class="px-8 py-4 glass text-white font-bold rounded-xl hover:bg-white/10 transition flex items-center justify-center gap-2">
                     <i data-lucide="github" class="w-5 h-5"></i> GitHub
                 </a>
             </div>
-
-            <div class="mt-16 pt-8 border-t border-white/5 flex flex-wrap justify-center gap-8 opacity-70 grayscale hover:grayscale-0 transition duration-500">
-                <img src="https://skillicons.dev/icons?i=java,react,nodejs,python,docker,mysql" alt="Tech Stack" class="h-10">
-            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="sobre" class="py-24 px-6 relative">
-        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-            <div class="relative group">
-                <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
-                <div class="relative glass-card p-8 rounded-3xl border border-white/10">
-                    <div class="flex flex-col gap-6">
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400">
-                                <i data-lucide="graduation-cap" class="w-8 h-8"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Engenharia de Software</h3>
-                                <p class="text-slate-400">Unopar Londrina • 5º Semestre</p>
-                                <p class="text-sm text-slate-500 mt-1">Foco em Desenvolvimento Web e Mobile</p>
-                            </div>
-                        </div>
-                        <div class="h-px bg-white/5"></div>
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400">
-                                <i data-lucide="music" class="w-8 h-8"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Background Musical</h3>
-                                <p class="text-slate-400">Professor de Orquestra e Piano (2023-2025)</p>
-                                <p class="text-sm text-slate-500 mt-1">Desenvolvi soft skills cruciais: disciplina rigorosa, trabalho em equipe e comunicação clara.</p>
-                            </div>
-                        </div>
-                        <div class="h-px bg-white/5"></div>
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-green-500/10 rounded-xl text-green-400">
-                                <i data-lucide="book-open" class="w-8 h-8"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-white">Aprendizado Contínuo</h3>
-                                <p class="text-slate-400">30+ Certificações Concluídas</p>
-                                <p class="text-sm text-slate-500 mt-1">Rocketseat, EBAC, Alura, Udemy, entre outros.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h2 class="text-4xl font-bold text-white mb-6">Mais que código, <span class="gradient-text">construo soluções.</span></h2>
-                <div class="space-y-6 text-lg text-slate-400 leading-relaxed">
-                    <p>
-                        Minha jornada na tecnologia começou cedo, e desde então venho acumulando um arsenal de conhecimentos. Não me limito a uma única linguagem; sou movido pela ferramenta certa para o problema.
-                    </p>
-                    <p>
-                        Tenho experiência prática com o ecossistema <strong>JavaScript (React, Node)</strong>, mas também possuo forte base em <strong>Java, Python e SQL</strong>. 
-                    </p>
-                    <p>
-                        Busco uma oportunidade de <strong>Estágio ou Trainee</strong> onde eu possa aplicar minha facilidade de aprendizado e minha dedicação para entregar valor real desde o primeiro dia.
-                    </p>
-                </div>
-                <div class="mt-8 flex gap-4">
-                    <div class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm font-mono text-blue-300">
-                        📍 Londrina, PR
-                    </div>
-                    <div class="px-4 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm font-mono text-green-300">
-                        🚀 Disponibilidade Imediata
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW SECTION: Services/Functionalities -->
-    <section id="servicos" class="py-20 px-6">
+    <!-- Lab Section -->
+    <section id="interativo" class="py-24 px-6 bg-slate-900/50">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">O Que Eu Entrego</h2>
-                <p class="text-slate-400">Minhas competências como Full Stack aplicadas em soluções reais.</p>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Portfólio Interativo</h2>
+                <p class="text-slate-400">Funcionalidades reais processadas no navegador.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1: Web Development -->
-                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-blue-500 transition-all">
-                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 text-blue-400">
-                        <i data-lucide="monitor" class="w-7 h-7"></i>
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center gap-3 mb-10">
+                <button onclick="switchTab('finance')" id="tab-finance" class="px-6 py-3 rounded-xl border border-slate-700 glass transition-all flex items-center gap-2 tab-active">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </button>
+                <button onclick="switchTab('kanban')" id="tab-kanban" class="px-6 py-3 rounded-xl border border-slate-700 glass transition-all flex items-center gap-2">
+                    <i data-lucide="trello" class="w-5 h-5"></i> Kanban
+                </button>
+                <button onclick="switchTab('music')" id="tab-music" class="px-6 py-3 rounded-xl border border-slate-700 glass transition-all flex items-center gap-2">
+                    <i data-lucide="activity" class="w-5 h-5"></i> DSP / Audio Lab
+                </button>
+            </div>
+
+            <!-- Main App Container -->
+            <div class="glass-card rounded-[3rem] p-8 md:p-12 border border-white/5 min-h-[500px]">
+                
+                <!-- 1. FINANCE DASHBOARD + EXPORT -->
+                <div id="app-finance">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Gestão Financeira</h3>
+                            <p class="text-slate-400 text-sm">Simulação de controle de caixa com exportação CSV.</p>
+                        </div>
+                        <button onclick="exportCSV()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold rounded-xl border border-slate-600 flex items-center gap-2 transition">
+                            <i data-lucide="download" class="w-4 h-4"></i> Baixar Relatório (CSV)
+                        </button>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Desenvolvimento Web & SPAs</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Criação de interfaces modernas, responsivas e de alta performance. Utilizo <strong>React.js e Angular</strong> para transformar designs complexos em Single Page Applications (SPAs) funcionais e acessíveis.
-                    </p>
+
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="glass-card p-6 rounded-3xl border-l-4 border-l-blue-500 relative overflow-hidden">
+                            <div class="relative z-10">
+                                <p class="text-slate-500 text-xs font-bold mb-1">SALDO LÍQUIDO</p>
+                                <h4 class="text-3xl font-bold text-white">R$ 12.450,00</h4>
+                            </div>
+                            <i data-lucide="wallet" class="absolute right-4 bottom-4 w-12 h-12 text-blue-500/10"></i>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl border-l-4 border-l-green-500 relative overflow-hidden">
+                            <div class="relative z-10">
+                                <p class="text-slate-500 text-xs font-bold mb-1">FATURAMENTO</p>
+                                <h4 class="text-3xl font-bold text-green-400">+ R$ 18.200</h4>
+                            </div>
+                            <i data-lucide="trending-up" class="absolute right-4 bottom-4 w-12 h-12 text-green-500/10"></i>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl border-l-4 border-l-red-500 relative overflow-hidden">
+                            <div class="relative z-10">
+                                <p class="text-slate-500 text-xs font-bold mb-1">CUSTOS OPERACIONAIS</p>
+                                <h4 class="text-3xl font-bold text-red-400">- R$ 5.750</h4>
+                            </div>
+                            <i data-lucide="trending-down" class="absolute right-4 bottom-4 w-12 h-12 text-red-500/10"></i>
+                        </div>
+                    </div>
+
+                    <!-- Goals & Table -->
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 glass bg-slate-900/40 rounded-3xl p-6 border border-white/5">
+                            <h5 class="text-white font-bold mb-4 flex items-center gap-2"><i data-lucide="list" class="w-4 h-4 text-blue-400"></i> Últimas Transações</h5>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-sm text-slate-400">
+                                    <thead class="text-xs uppercase bg-slate-800/50 text-slate-300">
+                                        <tr>
+                                            <th class="px-4 py-3 rounded-l-lg">Descrição</th>
+                                            <th class="px-4 py-3">Data</th>
+                                            <th class="px-4 py-3 text-right rounded-r-lg">Valor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-800">
+                                        <tr>
+                                            <td class="px-4 py-3">Desenvolvimento Web (Freela)</td>
+                                            <td class="px-4 py-3">15/05/2024</td>
+                                            <td class="px-4 py-3 text-right text-green-400 font-bold">+ R$ 3.500,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3">Servidor AWS (Infra)</td>
+                                            <td class="px-4 py-3">14/05/2024</td>
+                                            <td class="px-4 py-3 text-right text-red-400 font-bold">- R$ 150,00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3">Consultoria Java</td>
+                                            <td class="px-4 py-3">12/05/2024</td>
+                                            <td class="px-4 py-3 text-right text-green-400 font-bold">+ R$ 1.200,00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Savings Goal -->
+                        <div class="glass bg-slate-900/40 rounded-3xl p-6 border border-white/5 flex flex-col justify-center">
+                            <h5 class="text-white font-bold mb-2">Meta de Equipamentos</h5>
+                            <p class="text-xs text-slate-400 mb-4">MacBook Pro M3 para desenvolvimento</p>
+                            <div class="relative w-full h-4 bg-slate-800 rounded-full overflow-hidden mb-2">
+                                <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-600 to-purple-600 w-[65%]"></div>
+                            </div>
+                            <div class="flex justify-between text-xs font-bold">
+                                <span class="text-blue-400">65% Concluído</span>
+                                <span class="text-white">R$ 13k / 20k</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Card 2: Back-end API -->
-                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-purple-500 transition-all">
-                    <div class="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 text-purple-400">
-                        <i data-lucide="server-cog" class="w-7 h-7"></i>
+                <!-- 2. KANBAN BOARD -->
+                <div id="app-kanban" class="hidden">
+                    <div class="flex justify-between items-center mb-8">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Kanban de Projetos</h3>
+                            <p class="text-slate-400 text-sm">Gestão ágil de tarefas e estudos.</p>
+                        </div>
+                        <button onclick="addTaskKanban()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition">
+                            <i data-lucide="plus" class="w-4 h-4"></i> Nova Tarefa
+                        </button>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">APIs RESTful & Back-end</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Arquitetura de servidores robustos utilizando <strong>Node.js ou Java</strong>. Desenvolvo APIs seguras, escaláveis e documentadas (Swagger) para alimentar aplicações web e mobile.
-                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-full min-h-[400px]">
+                        <!-- Column 1: To Do -->
+                        <div class="bg-slate-900/50 rounded-2xl p-4 border border-white/5 flex flex-col">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-slate-500"></div> A Fazer
+                                </h5>
+                                <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400">2</span>
+                            </div>
+                            <div class="space-y-3 flex-1" id="col-todo">
+                                <!-- Task Card -->
+                                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 hover:border-blue-500/50 cursor-pointer transition group">
+                                    <span class="text-[10px] text-blue-400 font-bold bg-blue-900/20 px-2 py-0.5 rounded border border-blue-900/50">BACKEND</span>
+                                    <p class="text-white text-sm mt-2 font-medium">Configurar Docker para API Java</p>
+                                </div>
+                                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 hover:border-blue-500/50 cursor-pointer transition group">
+                                    <span class="text-[10px] text-purple-400 font-bold bg-purple-900/20 px-2 py-0.5 rounded border border-purple-900/50">DESIGN</span>
+                                    <p class="text-white text-sm mt-2 font-medium">Criar protótipo no Figma</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: In Progress -->
+                        <div class="bg-slate-900/50 rounded-2xl p-4 border border-white/5 flex flex-col">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div> Em Progresso
+                                </h5>
+                                <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400">1</span>
+                            </div>
+                            <div class="space-y-3 flex-1" id="col-progress">
+                                <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-l-blue-500 border-y border-r border-slate-700 hover:border-blue-500/50 cursor-pointer transition">
+                                    <span class="text-[10px] text-orange-400 font-bold bg-orange-900/20 px-2 py-0.5 rounded border border-orange-900/50">ESTUDO</span>
+                                    <p class="text-white text-sm mt-2 font-medium">Curso Avançado de Spring Boot</p>
+                                    <div class="w-full bg-slate-900 h-1.5 mt-3 rounded-full overflow-hidden">
+                                        <div class="bg-blue-500 h-full w-[40%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Column 3: Done -->
+                        <div class="bg-slate-900/50 rounded-2xl p-4 border border-white/5 flex flex-col">
+                            <div class="flex items-center justify-between mb-4">
+                                <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-green-500"></div> Concluído
+                                </h5>
+                                <span class="text-xs bg-slate-800 px-2 py-1 rounded text-slate-400">1</span>
+                            </div>
+                            <div class="space-y-3 flex-1" id="col-done">
+                                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 opacity-60 hover:opacity-100 transition">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <i data-lucide="check-circle-2" class="w-4 h-4 text-green-500"></i>
+                                        <span class="text-[10px] text-green-400 font-bold">DEPLOY</span>
+                                    </div>
+                                    <p class="text-white text-sm font-medium line-through decoration-slate-500">Publicar Portfólio v1</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Card 3: Database -->
-                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-yellow-500 transition-all">
-                    <div class="w-14 h-14 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 text-yellow-400">
-                        <i data-lucide="database" class="w-7 h-7"></i>
+                <!-- 3. MUSIC TECH: CHROMATIC TUNER (Title changed to technical terms) -->
+                <div id="app-music" class="hidden">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-bold rounded-full border border-purple-500/30">Processamento de Sinal</span>
+                                <span class="text-slate-500 text-xs font-mono">WEB AUDIO API</span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-white mb-4">Detector de Frequência (DSP)</h3>
+                            <p class="text-slate-400 mb-6 leading-relaxed">
+                                Exemplo prático de processamento digital de sinais no navegador. Utiliza algoritmos matemáticos (FFT/Autocorrelação) para analisar a frequência do microfone em tempo real.
+                            </p>
+                            <button id="start-audio" class="w-full md:w-auto px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 transition flex items-center justify-center gap-2 shadow-xl shadow-blue-600/30">
+                                <i data-lucide="mic" class="w-5 h-5"></i> Iniciar Análise
+                            </button>
+                        </div>
+
+                        <!-- Tuner UI -->
+                        <div class="relative bg-slate-950/80 rounded-[2rem] p-8 border border-white/10 flex flex-col items-center justify-center min-h-[350px] overflow-hidden shadow-inner" id="detector-box">
+                            <!-- Needle Gauge -->
+                            <div class="absolute top-10 left-0 w-full flex justify-center">
+                                <div class="w-64 h-32 border-t-2 border-l-2 border-r-2 border-slate-700 rounded-t-full relative overflow-hidden">
+                                    <div class="absolute bottom-0 left-1/2 w-1 h-full bg-slate-800 -translate-x-1/2"></div>
+                                    <div class="absolute bottom-0 left-1/2 w-1 h-28 bg-red-500 origin-bottom needle" id="tuner-needle" style="transform: rotate(0deg);"></div>
+                                    <!-- Scale Markers -->
+                                    <div class="absolute bottom-0 left-10 w-0.5 h-4 bg-slate-600"></div>
+                                    <div class="absolute bottom-0 right-10 w-0.5 h-4 bg-slate-600"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative z-10 text-center mt-24">
+                                <div id="note-display" class="text-8xl font-black text-white mb-2 transition-all duration-100">--</div>
+                                <div class="flex items-center justify-center gap-4">
+                                    <span id="deviation-display" class="text-sm font-mono text-slate-500">0 cents</span>
+                                    <span id="freq-display" class="text-blue-400 font-mono text-sm font-bold bg-blue-900/30 px-2 py-1 rounded">0.00 Hz</span>
+                                </div>
+                                <p id="tune-status" class="mt-4 text-sm font-bold tracking-widest uppercase text-slate-600">Aguardando Input...</p>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Modelagem de Dados</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Gerenciamento completo do ciclo de vida dos dados. Experiência na criação e otimização de consultas em bancos relacionais (<strong>SQL Server, MySQL</strong>) e não-relacionais (<strong>MongoDB</strong>).
-                    </p>
                 </div>
 
-                <!-- Card 4: Mobile Apps -->
-                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-green-500 transition-all">
-                    <div class="w-14 h-14 bg-green-500/10 rounded-2xl flex items-center justify-center mb-6 text-green-400">
-                        <i data-lucide="smartphone" class="w-7 h-7"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Desenvolvimento Mobile</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Expansão de soluções para o universo móvel. Desenvolvimento de aplicativos nativos Android com <strong>Kotlin</strong> e interfaces híbridas fluidas, garantindo presença em múltiplos dispositivos.
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Resume Section -->
+    <section id="sobre" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold text-white mb-8">Sobre Minha Jornada</h2>
+                <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
+                    <p>
+                        Cursando o <strong>5º Semestre de Engenharia de Software</strong> na Unopar Londrina. Minha abordagem ao desenvolvimento une a lógica técnica com a criatividade na resolução de problemas.
+                    </p>
+                    <p>
+                        Minha stack principal envolve <strong>Java, React, Node e Python</strong>, com forte base em bancos de dados SQL/NoSQL. Sou autodidata nato, com mais de 30 certificações nas principais plataformas de ensino (Rocketseat, EBAC, Alura).
                     </p>
                 </div>
+            </div>
 
-                <!-- Card 5: Version Control -->
-                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-orange-500 transition-all">
-                    <div class="w-14 h-14 bg-orange-500/10 rounded-2xl flex items-center justify-center mb-6 text-orange-400">
-                        <i data-lucide="git-branch" class="w-7 h-7"></i>
+            <div class="mt-16 grid md:grid-cols-2 gap-8">
+                <div class="p-8 glass-card rounded-3xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400"><i data-lucide="graduation-cap" class="w-6 h-6"></i></div>
+                        <h3 class="text-xl font-bold text-white">Formação</h3>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">DevOps & Git</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Controle de versão profissional com <strong>Git e GitHub</strong>, garantindo a integridade do código em equipe. Familiaridade com deploy e esteiras de desenvolvimento ágil.
-                    </p>
+                    <ul class="space-y-3 text-slate-400">
+                        <li>• Eng. de Software (5º Semestre)</li>
+                        <li>• Ensino Médio Completo (2022)</li>
+                        <li>• Inglês Técnico para Devs</li>
+                    </ul>
                 </div>
                 
-                 <!-- Card 6: Innovation -->
-                <div class="glass-card p-8 rounded-3xl hover-lift border-t-4 border-t-pink-500 transition-all">
-                    <div class="w-14 h-14 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 text-pink-400">
-                        <i data-lucide="brain-circuit" class="w-7 h-7"></i>
+                <div class="p-8 glass-card rounded-3xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400"><i data-lucide="briefcase" class="w-6 h-6"></i></div>
+                        <h3 class="text-xl font-bold text-white">Experiência</h3>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Resolução de Problemas</h3>
-                    <p class="text-slate-400 leading-relaxed">
-                        Mais do que escrever código, foco em resolver problemas. Aplico lógica de programação sólida e algoritmos (Python/C) para criar soluções eficientes e de fácil manutenção.
-                    </p>
+                    <ul class="space-y-3 text-slate-400">
+                        <li>• Professor de Música (2023-2025)</li>
+                        <li>• Desenvolvimento Full Stack (Freelance)</li>
+                        <li>• Projetos Acadêmicos Práticos</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack Grid -->
-    <section id="stack" class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Arsenal Tecnológico</h2>
-                <p class="text-slate-400">Ferramentas que domino e estudo constantemente.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Front-end -->
-                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400"><i data-lucide="layout" class="w-6 h-6"></i></div>
-                        <h3 class="font-bold text-white">Front-end</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">React.js</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Angular</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">HTML5/CSS3</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Tailwind</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Bootstrap</span>
-                    </div>
-                </div>
-
-                <!-- Back-end -->
-                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-green-500/10 rounded-lg text-green-400"><i data-lucide="server" class="w-6 h-6"></i></div>
-                        <h3 class="font-bold text-white">Back-end</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Node.js</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Java</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Python</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">PHP (Laravel)</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Express</span>
-                    </div>
-                </div>
-
-                <!-- Database -->
-                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-yellow-500/10 rounded-lg text-yellow-400"><i data-lucide="database" class="w-6 h-6"></i></div>
-                        <h3 class="font-bold text-white">Dados</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">SQL Server</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">MySQL</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">MongoDB</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">NoSQL</span>
-                    </div>
-                </div>
-
-                <!-- Mobile & Outros -->
-                <div class="glass-card p-6 rounded-2xl hover-lift transition-all">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400"><i data-lucide="smartphone" class="w-6 h-6"></i></div>
-                        <h3 class="font-bold text-white">Mobile & Tools</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Kotlin (Android)</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Dart</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Git/GitHub</span>
-                        <span class="px-3 py-1 rounded-md bg-slate-800 border border-slate-700 text-xs font-mono text-slate-300">Swagger</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer -->
+    <section id="contato" class="py-24 px-6 border-t border-white/5 text-center">
+        <h2 class="text-3xl font-bold text-white mb-10">Vamos criar algo extraordinário?</h2>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+            <a href="mailto:nicolasbissoqui@gmail.com" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-500 transition w-full md:w-auto flex items-center justify-center gap-2">
+                <i data-lucide="mail" class="w-5 h-5"></i> E-mail
+            </a>
+            <a href="https://wa.me/qr/NQHTMITJBNCPO1" target="_blank" class="px-8 py-4 glass text-white font-bold rounded-2xl hover:bg-white/10 transition w-full md:w-auto flex items-center justify-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i> WhatsApp
+            </a>
+            <a href="https://www.linkedin.com/in/nicolas-mandarino-7787761b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="px-8 py-4 glass text-white font-bold rounded-2xl hover:bg-white/10 transition w-full md:w-auto flex items-center justify-center gap-2">
+                <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
+            </a>
         </div>
+        <p class="mt-20 text-slate-600 text-sm">© 2024 Nicolas Mandarino Bissoqui | Londrina, PR</p>
     </section>
-
-    <!-- Education & Courses Slider/Grid -->
-    <section id="cursos" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-             <div class="flex items-center justify-between mb-10">
-                <h2 class="text-3xl font-bold text-white">Formação em Destaque</h2>
-                <span class="text-sm text-slate-500 font-mono hidden md:block">/// EDUCATION_LOG.TXT</span>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Course Item -->
-                <div class="border-l-2 border-purple-500 pl-6 py-2 relative">
-                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-purple-500 border-4 border-[#0f172a]"></span>
-                    <h4 class="text-lg font-bold text-white">Rocketseat Ignite</h4>
-                    <p class="text-purple-400 text-sm font-medium mb-1">NodeJS (82h) • ReactJS (106h) • Java (29h)</p>
-                    <p class="text-slate-400 text-sm">Formação intensiva focada no mercado, construindo aplicações reais do zero ao deploy.</p>
-                </div>
-                
-                <!-- Course Item -->
-                <div class="border-l-2 border-blue-500 pl-6 py-2 relative">
-                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-blue-500 border-4 border-[#0f172a]"></span>
-                    <h4 class="text-lg font-bold text-white">EBAC & Onebitcode</h4>
-                    <p class="text-blue-400 text-sm font-medium mb-1">Especialista Back-end Java • Full Stack JS</p>
-                    <p class="text-slate-400 text-sm">Aprofundamento em arquitetura de software, qualidade (QA) e desenvolvimento full stack.</p>
-                </div>
-
-                <!-- Course Item -->
-                <div class="border-l-2 border-green-500 pl-6 py-2 relative">
-                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-green-500 border-4 border-[#0f172a]"></span>
-                    <h4 class="text-lg font-bold text-white">Udemy & Alura</h4>
-                    <p class="text-green-400 text-sm font-medium mb-1">Android Kotlin • Python • SQL Server</p>
-                    <p class="text-slate-400 text-sm">Cursos focados em tecnologias específicas para diversificar o stack de desenvolvimento.</p>
-                </div>
-                
-                <!-- Course Item -->
-                <div class="border-l-2 border-slate-500 pl-6 py-2 relative">
-                    <span class="absolute -left-[9px] top-2 w-4 h-4 rounded-full bg-slate-500 border-4 border-[#0f172a]"></span>
-                    <h4 class="text-lg font-bold text-white">Idiomas</h4>
-                    <p class="text-slate-400 text-sm font-medium mb-1">Inglês para Devs (54h+)</p>
-                    <p class="text-slate-400 text-sm">Foco em leitura técnica e comunicação internacional.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projetos" class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold text-white mb-10">Projetos & Estudos de Caso</h2>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1 (Inferred from Ignite Node) -->
-                <div class="glass-card rounded-2xl overflow-hidden group">
-                    <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80 z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-60" alt="Backend Code">
-                        <div class="absolute z-20 bottom-4 left-6">
-                            <span class="text-xs font-bold px-2 py-1 bg-green-500/20 text-green-400 rounded border border-green-500/30">Node.js</span>
-                            <span class="text-xs font-bold px-2 py-1 bg-slate-700 text-slate-300 rounded border border-slate-600 ml-2">Back-end</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">API RESTful com Node.js</h3>
-                        <p class="text-slate-400 text-sm mb-4 line-clamp-3">
-                            Desenvolvimento de uma API robusta utilizando Express, Swagger para documentação e MySQL. Foco em arquitetura limpa e princípios SOLID, conforme aprendido na trilha Ignite.
-                        </p>
-                        <a href="https://github.com/Nicolas125-tech" class="text-blue-400 hover:text-blue-300 text-sm font-semibold flex items-center gap-1">
-                            Ver Repositório <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 (Inferred from React/Web) -->
-                <div class="glass-card rounded-2xl overflow-hidden group">
-                    <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80 z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-60" alt="Frontend">
-                        <div class="absolute z-20 bottom-4 left-6">
-                            <span class="text-xs font-bold px-2 py-1 bg-blue-500/20 text-blue-400 rounded border border-blue-500/30">React.js</span>
-                            <span class="text-xs font-bold px-2 py-1 bg-purple-500/20 text-purple-400 rounded border border-purple-500/30 ml-2">Tailwind</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">Dashboard Financeiro</h3>
-                        <p class="text-slate-400 text-sm mb-4 line-clamp-3">
-                            Interface responsiva e interativa criada com ReactJS. Implementação de hooks, controle de estado complexo e consumo de APIs externas para exibição de dados em tempo real.
-                        </p>
-                        <a href="https://github.com/Nicolas125-tech" class="text-blue-400 hover:text-blue-300 text-sm font-semibold flex items-center gap-1">
-                            Ver Repositório <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3 (Mobile/Kotlin) -->
-                <div class="glass-card rounded-2xl overflow-hidden group">
-                    <div class="h-48 bg-slate-800 relative overflow-hidden flex items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80 z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-60" alt="Mobile">
-                        <div class="absolute z-20 bottom-4 left-6">
-                            <span class="text-xs font-bold px-2 py-1 bg-orange-500/20 text-orange-400 rounded border border-orange-500/30">Kotlin</span>
-                            <span class="text-xs font-bold px-2 py-1 bg-slate-700 text-slate-300 rounded border border-slate-600 ml-2">Android</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-white mb-2">App Android Nativo</h3>
-                        <p class="text-slate-400 text-sm mb-4 line-clamp-3">
-                            Desenvolvimento de aplicação mobile utilizando Kotlin. Foco em ciclo de vida de atividades, layout XML e persistência de dados local, aplicando conhecimentos da formação Mimo e Udemy.
-                        </p>
-                        <a href="https://github.com/Nicolas125-tech" class="text-blue-400 hover:text-blue-300 text-sm font-semibold flex items-center gap-1">
-                            Ver Repositório <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contato" class="py-24 px-6 relative overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Pronto para acelerar <br>sua equipe?</h2>
-            <p class="text-slate-400 mb-10 text-lg max-w-2xl mx-auto">
-                Estou disponível para entrevistas e testes técnicos. Vamos conversar sobre como posso contribuir com meu background em Full Stack e minha dedicação.
-            </p>
-            
-            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-                <a href="mailto:nicolasbissoqui@gmail.com" class="flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold transition shadow-lg shadow-blue-600/20 w-full md:w-auto justify-center">
-                    <i data-lucide="mail" class="w-5 h-5"></i>
-                    nicolasbissoqui@gmail.com
-                </a>
-                <a href="https://wa.me/qr/NQHTMITJBNCPO1" target="_blank" class="flex items-center gap-3 px-8 py-4 glass hover:bg-white/10 text-white rounded-xl font-bold transition w-full md:w-auto justify-center">
-                    <i data-lucide="phone" class="w-5 h-5"></i>
-                    Conversar no WhatsApp
-                </a>
-            </div>
-
-            <div class="mt-12 flex justify-center gap-6">
-                <a href="https://www.linkedin.com/in/nicolas-mandarino-7787761b8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="text-slate-400 hover:text-white transition">LinkedIn</a>
-                <span class="text-slate-700">•</span>
-                <a href="https://github.com/Nicolas125-tech" target="_blank" class="text-slate-400 hover:text-white transition">GitHub</a>
-            </div>
-        </div>
-    </section>
-
-    <footer class="py-8 border-t border-white/5 text-center text-slate-600 text-sm">
-        <p>© 2024 Nicolas Mandarino Bissoqui. Londrina, PR.</p>
-    </footer>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
 
         function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         }
 
-        // Navbar blur effect on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-lg');
-                nav.classList.replace('bg-transparent', 'bg-slate-900/80');
-            } else {
-                nav.classList.remove('shadow-lg');
-            }
-        });
-
-        // Intersection Observer for fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
+        function switchTab(tab) {
+            ['finance', 'kanban', 'music'].forEach(t => {
+                document.getElementById(`app-${t}`).classList.add('hidden');
+                document.getElementById(`tab-${t}`).classList.remove('tab-active');
             });
-        }, { threshold: 0.1 });
+            document.getElementById(`app-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).classList.add('tab-active');
+            lucide.createIcons();
+        }
 
-        document.querySelectorAll('section > div').forEach(el => {
-            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-            observer.observe(el);
-        });
+        // --- KANBAN LOGIC ---
+        async function addTaskKanban() {
+             const { value: text } = await Swal.fire({
+                title: 'Nova Tarefa',
+                input: 'text',
+                background: '#0f172a',
+                color: '#fff',
+                confirmButtonColor: '#2563eb'
+            });
+            if (text) {
+                const col = document.getElementById('col-todo');
+                const div = document.createElement('div');
+                div.className = 'bg-slate-800 p-4 rounded-xl border border-slate-700 hover:border-blue-500/50 cursor-pointer transition group mt-3';
+                div.innerHTML = `
+                    <span class="text-[10px] text-slate-400 font-bold bg-slate-900 px-2 py-0.5 rounded border border-slate-700">GERAL</span>
+                    <p class="text-white text-sm mt-2 font-medium">${text}</p>
+                `;
+                col.appendChild(div);
+            }
+        }
+
+        // --- FINANCE EXPORT LOGIC ---
+        function exportCSV() {
+            const rows = [
+                ["Descrição", "Data", "Valor", "Tipo"],
+                ["Desenvolvimento Web", "15/05/2024", "3500.00", "Entrada"],
+                ["Servidor AWS", "14/05/2024", "-150.00", "Saída"],
+                ["Consultoria Java", "12/05/2024", "1200.00", "Entrada"]
+            ];
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + rows.map(e => e.join(",")).join("\n");
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "relatorio_financeiro_nicolas.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Download Iniciado',
+                text: 'O relatório financeiro foi exportado com sucesso.',
+                background: '#0f172a',
+                color: '#fff',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+
+        // --- MUSIC TECH LOGIC (TUNER) ---
+        let audioContext;
+        let analyser;
+        let dataArray;
+        let isListening = false;
+        
+        const noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+        const needle = document.getElementById('tuner-needle');
+        const tuneStatus = document.getElementById('tune-status');
+        const deviationDisplay = document.getElementById('deviation-display');
+
+        async function initAudio() {
+            if (isListening) return;
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const source = audioContext.createMediaStreamSource(stream);
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 2048;
+                source.connect(analyser);
+                dataArray = new Float32Array(analyser.fftSize);
+                isListening = true;
+                document.getElementById('start-audio').innerText = "Ouvindo...";
+                updatePitch();
+            } catch (err) {
+                Swal.fire({ title: 'Erro', text: 'Permissão de microfone negada.', icon: 'error', background: '#0f172a', color: '#fff'});
+            }
+        }
+
+        document.getElementById('start-audio').addEventListener('click', initAudio);
+
+        function autoCorrelate(buf, sampleRate) {
+            let SIZE = buf.length;
+            let rms = 0;
+            for (let i=0; i<SIZE; i++) rms += buf[i]*buf[i];
+            rms = Math.sqrt(rms/SIZE);
+            if (rms < 0.01) return -1; // Too quiet
+
+            let r1 = 0, r2 = SIZE - 1, thres = 0.2;
+            for (let i=0; i<SIZE/2; i++) if (Math.abs(buf[i]) < thres) { r1 = i; break; }
+            for (let i=1; i<SIZE/2; i++) if (Math.abs(buf[SIZE-i]) < thres) { r2 = SIZE-i; break; }
+            buf = buf.slice(r1, r2);
+            SIZE = buf.length;
+
+            let c = new Array(SIZE).fill(0);
+            for (let i=0; i<SIZE; i++)
+                for (let j=0; j<SIZE-i; j++)
+                    c[i] = c[i] + buf[j]*buf[j+i];
+
+            let d=0; while (c[d]>c[d+1]) d++;
+            let maxval = -1, maxpos = -1;
+            for (let i=d; i<SIZE; i++) {
+                if (c[i] > maxval) {
+                    maxval = c[i];
+                    maxpos = i;
+                }
+            }
+            let T0 = maxpos;
+            return sampleRate / T0;
+        }
+
+        function updatePitch() {
+            analyser.getFloatTimeDomainData(dataArray);
+            let pitch = autoCorrelate(dataArray, audioContext.sampleRate);
+
+            if (pitch === -1) {
+                document.getElementById('note-display').innerText = "--";
+                document.getElementById('freq-display').innerText = "0.00 Hz";
+                needle.style.transform = `rotate(0deg)`;
+                needle.classList.replace('bg-green-500', 'bg-red-500');
+                tuneStatus.innerText = "Aguardando Input...";
+            } else {
+                let noteNum = 12 * (Math.log(pitch / 440) / Math.log(2));
+                let noteIndex = Math.round(noteNum) + 69;
+                let noteName = noteStrings[noteIndex % 12];
+                
+                // Calculate cents deviation
+                let perfectFreq = 440 * Math.pow(2, (noteIndex - 69) / 12);
+                let cents = 1200 * Math.log2(pitch / perfectFreq);
+                
+                document.getElementById('note-display').innerText = noteName;
+                document.getElementById('freq-display').innerText = pitch.toFixed(1) + " Hz";
+                
+                // Needle Logic (-50 to +50 cents maps to -45deg to 45deg)
+                let angle = Math.max(-45, Math.min(45, cents));
+                needle.style.transform = `rotate(${angle}deg)`;
+                deviationDisplay.innerText = (cents > 0 ? "+" : "") + cents.toFixed(0) + " cents";
+
+                if (Math.abs(cents) < 5) {
+                    needle.classList.replace('bg-red-500', 'bg-green-500');
+                    tuneStatus.innerText = "AFINADO";
+                    tuneStatus.classList.replace('text-slate-600', 'text-green-500');
+                } else {
+                    needle.classList.replace('bg-green-500', 'bg-red-500');
+                    tuneStatus.innerText = cents < 0 ? "BAIXO (FLAT)" : "ALTO (SHARP)";
+                    tuneStatus.classList.replace('text-green-500', 'text-slate-600');
+                }
+            }
+            if (isListening) requestAnimationFrame(updatePitch);
+        }
     </script>
 </body>
 </html>
